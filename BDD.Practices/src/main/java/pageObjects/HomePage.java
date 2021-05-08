@@ -8,11 +8,9 @@ import Base.BaseClass;
 
 public class HomePage extends BaseClass {
 
-	WebDriver driver;
 	String emailId;
 
-	public HomePage(WebDriver driver) {
-		this.driver = driver;
+	public HomePage() {
 		PageFactory.initElements(driver, this);
 	}
 
@@ -49,18 +47,19 @@ public class HomePage extends BaseClass {
 	// Actions to be performed
 
 	public void clickSignin() {
-		signin.click();
+		waitForElement(driver, signin, 20);
+		click(driver, signin);
 	}
 
 	public String enterNewEmail() {
 		emailId = generateRandomString() + "@gmail.com";
-		enterText(newEmailAddressTextBox, emailId);
+		type(newEmailAddressTextBox, emailId);
 		return emailId;
 	}
 
 	public void clickCreateAccount() {
 		waitForElement(driver, createAC, 15);
-		createAC.click();
+		click(driver, createAC);
 	}
 
 	public String verifyUserHeader() {
@@ -68,20 +67,20 @@ public class HomePage extends BaseClass {
 	}
 
 	public boolean signOut() {
-		signOut.click();
-		return signin.isDisplayed();
+		click(driver, signOut);
+		return isDisplayed(driver, signin);
 	}
 
 	public void enterRegisteredEmailId(String email) {
-		enterText(registeredEmailAddressTextBox, email);
+		type(registeredEmailAddressTextBox, email);
 	}
 
 	public void enterPasswordForLogin(String pwd) {
-		enterText(passwordTextBox, pwd);
+		type(passwordTextBox, pwd);
 	}
 
 	public boolean loginToApp() {
-		logInButton.click();
-		return myAccount.isDisplayed();
+		click(driver, logInButton);
+		return isDisplayed(driver, myAccount);
 	}
 }

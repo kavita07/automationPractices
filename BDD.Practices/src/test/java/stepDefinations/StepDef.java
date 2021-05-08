@@ -1,13 +1,8 @@
 package stepDefinations;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import Base.BaseClass;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -20,7 +15,6 @@ import pageObjects.RegistrationPage;
 
 public class StepDef extends BaseClass {
 
-	public WebDriver driver;
 	HomePage homepage;
 	RegistrationPage register;
 	AddToCartPage addToCartPage;
@@ -30,33 +24,17 @@ public class StepDef extends BaseClass {
 	@Before
 	public void setUp() throws IOException {
 		logger = Logger.getLogger("BDD.Practices");
-		PropertyConfigurator.configure("log4j.properties");
-
-		String browserType = readPropertiesFile(configFilePath, "browser");
-
-		logger.info("browser type :" + browserType);
-
-		if (browserType.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", readPropertiesFile(configFilePath, "chromepath"));
-			driver = new ChromeDriver();
-		} else if (browserType.equals("ie")) {
-			System.setProperty("webdriver.ie.driver", readPropertiesFile(configFilePath, "iepath"));
-			driver = new InternetExplorerDriver();
-		}
-
-		logger.info("********** LOUNCHING BROWSER **********");
-
-		homepage = new HomePage(driver);
-		register = new RegistrationPage(driver);
-		addToCartPage = new AddToCartPage(driver);
+		
+		launchApp();
+		
+		homepage = new HomePage();
+		register = new RegistrationPage();
+		addToCartPage = new AddToCartPage();
 	}
 
 	@When("User opens URL in appropriate browser")
 	public void User_opens_URL() throws Throwable {
-		logger.info("********** OPENING URL **********");
-		driver.get(readPropertiesFile(configFilePath, "url"));
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		Assert.assertEquals(navigateToURL(), readPropertiesFile(configFilePath, "title"));
 	}
 
 	@And("User clicks on Signin on landing page")
@@ -196,8 +174,8 @@ public class StepDef extends BaseClass {
 	}
 
 	@After
-	public void closeWindow() throws IOException {
+	public void tearDown() throws IOException {
 		logger.info("********** CLOSING BROWSER **********");
-		driver.close();
+		driver.quit();
 	}
 }

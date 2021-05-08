@@ -8,10 +8,7 @@ import Base.BaseClass;
 
 public class RegistrationPage extends BaseClass {
 
-	public WebDriver driver;
-
-	public RegistrationPage(WebDriver driver) {
-		this.driver = driver;
+	public RegistrationPage() {
 		PageFactory.initElements(driver, this);
 	}
 
@@ -62,29 +59,29 @@ public class RegistrationPage extends BaseClass {
 	public void selectGenderTitle(String title) {
 		waitForElement(driver, createAcountLabel, 15);
 		if (title.equals("Mr."))
-			maleGender.click();
+			click(driver, maleGender);
 		else
-			femaleGender.click();
+			click(driver, femaleGender);
 	}
 
 	public void enterFirstName(String fname) {
-		enterText(firstNameTextBox, fname);
+		type(firstNameTextBox, fname);
 	}
 
 	public void enterLastName(String fname) {
-		enterText(lastNameTextBox, fname);
+		type(lastNameTextBox, fname);
 	}
 
 	public void enterPasswordForRegistration(String pwd) {
-		enterText(passwordTextBox, pwd);
+		type(passwordTextBox, pwd);
 	}
 
 	public void enterAddress(String address) {
-		enterText(addressLine1, address);
+		type(addressLine1, address);
 	}
 
 	public void enterCity(String cityName) {
-		enterText(city, cityName);
+		type(city, cityName);
 	}
 
 	public void selectState(String state) {
@@ -92,7 +89,7 @@ public class RegistrationPage extends BaseClass {
 	}
 
 	public void enterZipCode(String zipc) {
-		enterText(zipcode, zipc);
+		type(zipcode, zipc);
 	}
 
 	public void selectCountry(String country) {
@@ -100,15 +97,15 @@ public class RegistrationPage extends BaseClass {
 	}
 
 	public void enterAdditionalInfo(String no) {
-		enterText(additionalInfo, no);
+		type(additionalInfo, no);
 	}
 
 	public void enterMobileNo(String no) {
-		enterText(mobileNo, no);
+		type(mobileNo, no);
 	}
 
 	public void clickOnRegisterButton() {
-		registerButton.click();
+		click(driver, registerButton);
 	}
 
 }

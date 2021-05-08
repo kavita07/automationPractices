@@ -10,7 +10,6 @@ import Base.BaseClass;
 
 public class AddToCartPage extends BaseClass {
 
-	public WebDriver driver;
 	HashMap<String, String> cartPageMap;
 	HashMap<String, String> paymentPageMap;
 	String ProductName;
@@ -21,9 +20,8 @@ public class AddToCartPage extends BaseClass {
 	String ProductShippingCost;
 	String ProductTotalCost;
 
-	public AddToCartPage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
+	public AddToCartPage() {
+ 		PageFactory.initElements(driver, this);
 		cartPageMap = new HashMap<String, String>();
 		paymentPageMap = new HashMap<String, String>();
 	}
@@ -89,7 +87,7 @@ public class AddToCartPage extends BaseClass {
 
 	public boolean selectT_shirtCatagory() {
 		clickUsingJavaSCript(driver, t_shirt_catagory);
-		return tshirtLabel.isDisplayed();
+		return isDisplayed(driver, tshirtLabel);
 	}
 
 	public void openProduct() {
@@ -98,7 +96,7 @@ public class AddToCartPage extends BaseClass {
 
 	public void addToCart() {
 		waitForElement(driver, addToCartButton, 15);
-		addToCartButton.click();
+		click(driver, addToCartButton);
 	}
 
 	public void getCartProductDetails() {
@@ -117,19 +115,19 @@ public class AddToCartPage extends BaseClass {
 
 	public void proceedToCheckOutOnCart() {
 		waitForElement(driver, proceedToCheckout.get(0), 15);
-		proceedToCheckout.get(0).click();
+		click(driver, proceedToCheckout.get(0));
 		waitForElement(driver, proceedToCheckout.get(1), 15);
 
 		cartPageMap.put(ProductTotalCost, productTotalPrice.getText().trim());
 
-		proceedToCheckout.get(1).click();
+		click(driver, proceedToCheckout.get(1));
 
 		waitForElement(driver, proceedToCheckoutAddress, 15);
-		proceedToCheckoutAddress.click();
+		click(driver, proceedToCheckoutAddress);
 
 		waitForElement(driver, proceedToCheckoutCarrier, 15);
-		termsAndConditionsCheckBox.click();
-		proceedToCheckoutCarrier.click();
+		click(driver, termsAndConditionsCheckBox);
+		click(driver, proceedToCheckoutCarrier);
 
 	}
 
