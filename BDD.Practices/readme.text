@@ -1,0 +1,13 @@
+Download allure framework latest release. Unzip the folde, copy path till bin and set under environment path
+
+To run runner file -> open sr/test/java -> runner -> RunTest.java right click Run as JUnit Test
+
+Once execution is finished.
+
+At project level open terminal type below command
+
+allure serve
+
+This command will generate report in temp repository and auto opens in browser
+
+This way you can validate result
