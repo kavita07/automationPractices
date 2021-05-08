@@ -1,0 +1,1 @@
+{"uuid":"b64d5897-11c5-47a7-8f0d-a64dc1fb48cc","name":"Scenario Outline: Newly created user is able to do login as well as add product to cart and checkout","children":["136ad880-0311-40d9-ae4e-5995b8b845fb"],"befores":[],"afters":[],"links":[],"start":1620475681557,"stop":1620475681567}

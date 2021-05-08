@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import Base.BaseClass;
 
 public class AddToCartPage extends BaseClass {
-	
+
 	public WebDriver driver;
 	HashMap<String, String> cartPageMap;
 	HashMap<String, String> paymentPageMap;
@@ -20,14 +20,14 @@ public class AddToCartPage extends BaseClass {
 	String ProductPrice;
 	String ProductShippingCost;
 	String ProductTotalCost;
-	
+
 	public AddToCartPage(WebDriver driver) {
 		this.driver = driver;
-		PageFactory.initElements(driver, this);	
-		cartPageMap = new HashMap<String, String>();	
+		PageFactory.initElements(driver, this);
+		cartPageMap = new HashMap<String, String>();
 		paymentPageMap = new HashMap<String, String>();
 	}
-	
+
 	@FindBy(xpath = "//li[a[@title='Tops']]/ul/li/a[text()='T-shirts']")
 	WebElement t_shirt_catagory;
 
@@ -72,8 +72,7 @@ public class AddToCartPage extends BaseClass {
 
 	@FindBy(xpath = "//small/a")
 	WebElement productColorAndSize;
-	
-	
+
 	@FindBy(css = ".cart_quantity.text-center span")
 	WebElement productQuantity;
 
@@ -86,24 +85,24 @@ public class AddToCartPage extends BaseClass {
 	@FindBy(id = "total_price")
 	WebElement productTotalPrice;
 	
-	public boolean selectT_shirtCatagory(){
+	// Actions to be performed
+
+	public boolean selectT_shirtCatagory() {
 		clickUsingJavaSCript(driver, t_shirt_catagory);
 		return tshirtLabel.isDisplayed();
 	}
 
-	public void openProduct(){
-		//waitForElement(driver, quickView.get(0), 15);
-		//quickView.get(0).click();
+	public void openProduct() {
 		clickUsingJavaSCript(driver, quickView.get(0));
 	}
 
-	public void addToCart(){
+	public void addToCart() {
 		waitForElement(driver, addToCartButton, 15);
 		addToCartButton.click();
 	}
 
-	public void getCartProductDetails(){
-		waitForElement(driver,cartProductName, 15);
+	public void getCartProductDetails() {
+		waitForElement(driver, cartProductName, 15);
 		cartPageMap.put(ProductName, cartProductName.getText().trim());
 
 		String arr[] = cartProductColorAndSize.getText().split(",");
@@ -116,9 +115,7 @@ public class AddToCartPage extends BaseClass {
 		cartPageMap.put(ProductShippingCost, cartProductShippingCost.getText().trim());
 	}
 
-
-
-	public void proceedToCheckOutOnCart(){
+	public void proceedToCheckOutOnCart() {
 		waitForElement(driver, proceedToCheckout.get(0), 15);
 		proceedToCheckout.get(0).click();
 		waitForElement(driver, proceedToCheckout.get(1), 15);
@@ -136,14 +133,13 @@ public class AddToCartPage extends BaseClass {
 
 	}
 
-
-	public boolean verifyProductDetails(){
+	public boolean verifyProductDetails() {
 		waitForElement(driver, productName, 15);
 		String arr[] = productColorAndSize.getText().split(",");
 		String corlorPart[] = arr[0].split(":");
 		String color = corlorPart[1].trim();
 		String sizePart[] = arr[1].split(":");
-		String size = sizePart[1].trim(); 
+		String size = sizePart[1].trim();
 		paymentPageMap.put(ProductName, productName.getText().trim());
 		paymentPageMap.put(ProductColor, color);
 		paymentPageMap.put(ProductSize, size);
@@ -155,6 +151,5 @@ public class AddToCartPage extends BaseClass {
 		return cartPageMap.equals(paymentPageMap);
 
 	}
-
 
 }

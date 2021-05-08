@@ -1,4 +1,5 @@
 Download allure framework latest release. Unzip the folde, copy path till bin and set under environment path
+reference link -> https://github.com/allure-framework/allure2
 
 To run runner file -> open sr/test/java -> runner -> RunTest.java right click Run as JUnit Test
 

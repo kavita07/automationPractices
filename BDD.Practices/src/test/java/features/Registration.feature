@@ -21,27 +21,21 @@ Feature: User registration and validating product checkout workflow
     And User clicks on Register button
     Then User verifies on landing screen correct "<firstName>" and "<lastName>" is displayed
     And User logout from application
-    
-    Examples:
-    |title|firstName|lastName|addressLine1|city|state|zipCode|country|additionalPhoneNo|mobileNo|
-    |Mr.	|Sanika		|Agnihotri|DP road		|Moody|Alabama|35004|United States|2050880880|2560880880|
-    
-    Scenario Outline: Newly created user is able to do login as well as add product to cart and checkout
+
+    Examples: 
+      | title | firstName | lastName  | addressLine1 | city  | state   | zipCode | country       | additionalPhoneNo | mobileNo   |
+      | Mr.   | Sanika    | Agnihotri | DP road      | Moody | Alabama |   35004 | United States |        2050880880 | 2560880880 |
+
+  Scenario Outline: Newly created user is able to do login as well as add product to cart and checkout
     When User enters registered email id
     And User enters password for login
     And User clicks on SignIn button
     And User selects product catagory as "<catagory>"
-    And User selects first product 
+    And User selects first product
     And User adds the product to cart
     And User clicks on proceed to checkout button
     Then User verifies the product details
-    
-    Examples:
-    |catagory|
-    |T-shirt|
-    
-    
-    
-    
-     
-    
+
+    Examples: 
+      | catagory |
+      | T-shirt  |

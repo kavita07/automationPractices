@@ -25,26 +25,27 @@ public class StepDef extends BaseClass {
 	RegistrationPage register;
 	AddToCartPage addToCartPage;
 	String emailId;
-	String configFilePath =".//config.properties";
+	String configFilePath = ".//config.properties";
+
 	@Before
 	public void setUp() throws IOException {
 		logger = Logger.getLogger("BDD.Practices");
 		PropertyConfigurator.configure("log4j.properties");
-		
+
 		String browserType = readPropertiesFile(configFilePath, "browser");
-		
+
 		logger.info("browser type :" + browserType);
 
-		if(browserType.equals("chrome")) {
+		if (browserType.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver", readPropertiesFile(configFilePath, "chromepath"));
 			driver = new ChromeDriver();
-		}else if(browserType.equals("ie")) {
+		} else if (browserType.equals("ie")) {
 			System.setProperty("webdriver.ie.driver", readPropertiesFile(configFilePath, "iepath"));
 			driver = new InternetExplorerDriver();
 		}
 
 		logger.info("********** LOUNCHING BROWSER **********");
-		
+
 		homepage = new HomePage(driver);
 		register = new RegistrationPage(driver);
 		addToCartPage = new AddToCartPage(driver);
@@ -90,7 +91,7 @@ public class StepDef extends BaseClass {
 
 	@And("User enters password")
 	public void User_enters_password_as() throws Throwable {
-		//prop.load(configFileIn);
+		// prop.load(configFileIn);
 		register.enterPasswordForRegistration(readPropertiesFile(configFilePath, "password"));
 	}
 
@@ -136,8 +137,9 @@ public class StepDef extends BaseClass {
 
 	@And("User verifies on landing screen correct {string} and {string} is displayed")
 	public void User_verifies_on_landing_screen_correct_name_surename(String fname, String lname) throws Throwable {
-		Assert.assertEquals(fname+" "+lname, homepage.verifyUserHeader());
+		Assert.assertEquals(fname + " " + lname, homepage.verifyUserHeader());
 		writeToPropertiesFile(configFilePath, "generatedemailid", emailId);
+		logger.info("********** USER REGISTERED SUCCESSFULLY **********");
 
 	}
 
@@ -159,39 +161,43 @@ public class StepDef extends BaseClass {
 	@And("User clicks on SignIn button")
 	public void User_clicks_on_SignIn_button() {
 		Assert.assertTrue(homepage.loginToApp());
+		logger.info("********** REGISTERED USER SUCCESSFULLY LOGGED IN **********");
 	}
-	
+
 	@And("User selects product catagory as {string}")
-	public void User_selects_product_catagory_as_(String catagory){
-		
-		if(catagory.equals("T-shirt"))
-			Assert.assertTrue(addToCartPage.selectT_shirtCatagory())	;
-		
+	public void User_selects_product_catagory_as_(String catagory) {
+
+		if (catagory.equals("T-shirt"))
+			Assert.assertTrue(addToCartPage.selectT_shirtCatagory());
+
 	}
-	
+
 	@And("User selects first product")
 	public void User_selects_first_product() {
 		addToCartPage.openProduct();
 	}
-	
+
 	@And("User adds the product to cart")
 	public void User_adds_the_product_to_cart() {
 		addToCartPage.addToCart();
+		logger.info("********** PRODUCT ADDED TO CART **********");
 	}
-	
+
 	@And("User clicks on proceed to checkout button")
 	public void User_clicks_on_proceed_to_checkout_button() {
 		addToCartPage.getCartProductDetails();
 		addToCartPage.proceedToCheckOutOnCart();
 	}
-	
+
 	@Then("User verifies the product details")
 	public void User_verifies_the_product_details() {
 		Assert.assertTrue(addToCartPage.verifyProductDetails());
+		logger.info("********** PRODUCT DETAILS ARE SAME ON THE PAGES CART DETAIL AND PAYMENT DETAILS **********");
 	}
 
 	@After
 	public void closeWindow() throws IOException {
+		logger.info("********** CLOSING BROWSER **********");
 		driver.close();
 	}
 }

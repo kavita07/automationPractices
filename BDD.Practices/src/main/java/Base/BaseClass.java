@@ -17,51 +17,51 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.HomePage;
 
 public class BaseClass {
-	
+
 	public WebDriver driver;
 	public HomePage homepage;
 	public static Logger logger;
 	public Properties prop;
 	FileInputStream IN;
 	PropertiesConfiguration config;
-	
-	//Generating random email id's
+
+	// Generating random email id's
 	public static String generateRandomString() {
 		return RandomStringUtils.randomAlphabetic(5);
 	}
-	
+
 	public void waitForElement(WebDriver driver, WebElement element, long timeOutInSeconds) {
 		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
 		wait.until(ExpectedConditions.visibilityOf(element));
-		
+
 	}
-	
+
 	public void selectDropDownByText(WebDriver driver, WebElement element, String text) {
 		Select select = new Select(element);
 		select.selectByVisibleText(text);
 	}
-	
-	public void enterText(WebElement element, String text){
+
+	public void enterText(WebElement element, String text) {
 		element.clear();
 		element.sendKeys(text);
 	}
-	
-	public String readPropertiesFile(String filePath,String key) throws IOException {
-		IN  = new FileInputStream(filePath);
+
+	public String readPropertiesFile(String filePath, String key) throws IOException {
+		IN = new FileInputStream(filePath);
 		prop = new Properties();
-		prop.load(IN);		
+		prop.load(IN);
 		return prop.getProperty(key);
 	}
-	
-	public void writeToPropertiesFile(String filePath,String key, String value) throws ConfigurationException {
+
+	public void writeToPropertiesFile(String filePath, String key, String value) throws ConfigurationException {
 		config = new PropertiesConfiguration(filePath);
 		config.setProperty(key, value);
 		config.save();
 	}
-	
+
 	public void clickUsingJavaSCript(WebDriver driver, WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor)driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
 	}
-	
+
 }

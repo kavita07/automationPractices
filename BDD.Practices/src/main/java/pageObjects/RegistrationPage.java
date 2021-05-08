@@ -6,14 +6,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import Base.BaseClass;
 
-public class RegistrationPage extends BaseClass{
+public class RegistrationPage extends BaseClass {
 
 	public WebDriver driver;
-	
 
 	public RegistrationPage(WebDriver driver) {
 		this.driver = driver;
-		PageFactory.initElements(driver, this);	
+		PageFactory.initElements(driver, this);
 	}
 
 	@FindBy(className = "page-heading")
@@ -58,58 +57,57 @@ public class RegistrationPage extends BaseClass{
 	@FindBy(id = "submitAccount")
 	WebElement registerButton;
 
-	//actions to be performed
+	//Actions to be performed
 
-	public void selectGenderTitle(String title){
+	public void selectGenderTitle(String title) {
 		waitForElement(driver, createAcountLabel, 15);
-		if(title.equals("Mr."))
+		if (title.equals("Mr."))
 			maleGender.click();
 		else
 			femaleGender.click();
 	}
 
-	public void enterFirstName(String fname){
+	public void enterFirstName(String fname) {
 		enterText(firstNameTextBox, fname);
 	}
 
-	public void enterLastName(String fname){
+	public void enterLastName(String fname) {
 		enterText(lastNameTextBox, fname);
-	}	
+	}
 
-	public void enterPasswordForRegistration(String pwd){
+	public void enterPasswordForRegistration(String pwd) {
 		enterText(passwordTextBox, pwd);
 	}
 
-	public void enterAddress(String address){
+	public void enterAddress(String address) {
 		enterText(addressLine1, address);
 	}
 
-	public void enterCity(String cityName){
+	public void enterCity(String cityName) {
 		enterText(city, cityName);
 	}
 
-	public void selectState(String state){
+	public void selectState(String state) {
 		selectDropDownByText(driver, stateDropDown, state);
 	}
 
-	public void enterZipCode(String zipc){
+	public void enterZipCode(String zipc) {
 		enterText(zipcode, zipc);
 	}
 
-	public void selectCountry(String country){
+	public void selectCountry(String country) {
 		selectDropDownByText(driver, countryDropdown, country);
 	}
 
-
-	public void enterAdditionalInfo(String no){
+	public void enterAdditionalInfo(String no) {
 		enterText(additionalInfo, no);
 	}
-	
-	public void enterMobileNo(String no){
+
+	public void enterMobileNo(String no) {
 		enterText(mobileNo, no);
 	}
-	
-	public void clickOnRegisterButton(){
+
+	public void clickOnRegisterButton() {
 		registerButton.click();
 	}
 
