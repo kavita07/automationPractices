@@ -1,0 +1,26 @@
+"use strict";
+exports.__esModule = true;
+var name = 'kavita';
+var n = 10;
+var isBigginer = true;
+var sentence = "I am " + name + "\nI am bigginer";
+console.log(sentence);
+var list1 = [1, 2, 3];
+var list2 = [1, 2, 3];
+var list3 = ['kavita', 5];
+var color;
+(function (color) {
+    color[color["Reg"] = 0] = "Reg";
+    color[color["Green"] = 1] = "Green";
+    color[color["Yellow"] = 2] = "Yellow";
+})(color || (color = {}));
+;
+var c = color.Green;
+console.log('color:' + c);
+var anyType = 10;
+anyType = true;
+anyType = 'chavan';
+console.log('anyType latest value:' + anyType);
+var a;
+a = 10;
+a = 20;
